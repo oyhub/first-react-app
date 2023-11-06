@@ -9,6 +9,9 @@ import Button from './components/StyledComponents/button';
 import Logo from './images/noroff-logo.png';
 import UseState from './components/hooksAndState/useState';
 import UseEffect from './components/hooksAndState/UseEffect';
+import UseReducer from './components/hooksAndState/UseReducer';
+import UseContext from './components/hooksAndState/UseContext/UseContext';
+import Zustand from './components/zustand/Zustand';
 
 const products = [
     { id: 0, title: 'Bread', price: 19.99, isOnSale: true },
@@ -42,6 +45,9 @@ function App() {
         <img src={Logo} style={{ maxWidth: '15rem' }} alt="Alt tekst her" title="Test tittel her" />
         <UseState/>
         <UseEffect/>
+        <UseReducer/>
+        <UseContext/>
+        <Zustand/>
     </div>
   );
 }
