@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
+import Post from './Post';
 
 const url = "https://api.noroff.dev/api/v1/online-shop";
 
-interface Entry {
+export interface Entry {
     id: string;
     title: string;
     description: string;
@@ -10,30 +11,30 @@ interface Entry {
 }
 
 function PostApiCall() {
-    const [entrys, setEntrys] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
-    const [isError, setIsError] = useState(false);
+    const [entrys, setEntrys] = useState<Entry[]>([]);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [isError, setIsError] = useState<string | null >(null);
 
     useEffect(() => {
         async function getData() {
             try {
-                setIsError(false);
+                setIsError(null);
                 setIsLoading(true);
 
                 const response = await fetch(url);
                 const result = await response.json();
 
-                if (result) {
+                if (response.ok) {
                     setEntrys(result);
-                    setIsLoading(false);
                 } else {
-                    setIsLoading(false);
-                    setIsError(true);
+                    setIsError('Could not get data');
                 }
 
             } catch (error) {
                 setIsLoading(false);
-                setIsError(true);
+                setIsError('Upps, something went wrong.. Try again');
+            } finally {
+                setIsLoading(false);
             }
         }
         getData();
@@ -45,18 +46,14 @@ function PostApiCall() {
     }
 
     if (isError) {
-        return <div>An error occurred</div>;
+        return <div>{ isError }</div>;
     }
 
     return(
         <div>
             <h2>Api call with post format</h2>
             {entrys.slice(0,5).map((entry: Entry) => (
-                <div key={entry.id}>
-                    <h3>{entry.title}</h3>
-                    <p>{entry.description}</p>
-                    <p>{entry.price}</p>
-                </div>
+                <Post key={entry.id} entry={entry}/>
             ))}
         </div>
     )

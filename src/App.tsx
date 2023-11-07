@@ -17,7 +17,7 @@ import greeting from './components/greeting';
 import Nav from './components/Nav';
 import Layout from './components/Layout';
 import LocalProducts from './components/LocalProducts';
-import PostApiCall from './components/PostApiCall';
+import PostApiCall from './components/ApiCall/PostApiCall';
 
 const products = [
     { id: 0, title: 'Bread', price: 19.99, isOnSale: true },
