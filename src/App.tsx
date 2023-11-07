@@ -12,6 +12,12 @@ import UseEffect from './components/hooksAndState/UseEffect';
 import UseReducer from './components/hooksAndState/UseReducer';
 import UseContext from './components/hooksAndState/UseContext/UseContext';
 import Zustand from './components/zustand/Zustand';
+import { Route, Routes } from 'react-router-dom';
+import greeting from './components/greeting';
+import Nav from './components/Nav';
+import Layout from './components/Layout';
+import LocalProducts from './components/LocalProducts';
+import PostApiCall from './components/PostApiCall';
 
 const products = [
     { id: 0, title: 'Bread', price: 19.99, isOnSale: true },
@@ -34,20 +40,38 @@ function App() {
   // @ts-ignore
     return (
     <div>
-        <Greeting></Greeting>
-        <Person firstName="First" lastName="Last name" city="The city"></Person>
+        {/*<Nav/>*/}
+        {/*<Greeting></Greeting>*/}
+        {/*<Person firstName="First" lastName="Last name" city="The city"></Person>*/}
         <button onClick={onButtonClick}>Change Product</button>
-        <Product productTitle={productTitle}></Product>
-        <ProductList products={products}></ProductList>
+        {/*<Product productTitle={productTitle}></Product>*/}
+        {/*<ProductList products={products}></ProductList>*/}
         <Button isActive={activeState} onClick={handleButtonClick}>Test button</Button>
         <p className='text'>Paragraph 1</p>
         <p className='text'>Paragraph 2</p>
         <img src={Logo} style={{ maxWidth: '15rem' }} alt="Alt tekst her" title="Test tittel her" />
-        <UseState/>
-        <UseEffect/>
-        <UseReducer/>
-        <UseContext/>
-        <Zustand/>
+        {/*<UseState/>*/}
+        {/*<UseEffect/>*/}
+        {/*<UseReducer/>*/}
+        {/*<UseContext/>*/}
+        {/*<Zustand/>*/}
+        <Routes>
+            <Route path="/" element={<Layout/>}>
+                <Route index element={<div>Home Page</div>}/>
+                <Route path="greeting" element={<Greeting/>}/>
+                <Route path="person" element={<Person firstName="First" lastName="Last name" city="The city"/>}/>
+                <Route path="product" element={<Product productTitle={productTitle}/>}/>
+                <Route path="productlist" element={<ProductList products={products}/>}/>
+                <Route path="usestate" element={<UseState/>}/>
+                <Route path="useeffect" element={<UseEffect/>}/>
+                <Route path="usereducer" element={<UseReducer/>}/>
+                <Route path="usecontext" element={<UseContext/>}/>
+                <Route path="zustand" element={<Zustand/>}/>
+                <Route path="localproducts/:id" element={<LocalProducts/>}/>
+                <Route path="postapicall" element={<PostApiCall/>}/>
+                <Route path="*" element={<div>Element not found</div>}/>
+            </Route>
+        </Routes>
     </div>
   );
 }
