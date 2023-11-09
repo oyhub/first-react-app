@@ -18,6 +18,8 @@ function Nav() {
                 <li><Link to="/localproducts/2">LocalProduct 2</Link></li>
                 <li><Link to="/localproducts/3">LocalProduct 3</Link></li>
                 <li><Link to="/postapicall">Api call</Link></li>
+                <li><Link to="/post/6">SinglePost</Link></li>
+                <li><Link to="/firstform">First form</Link></li>
             </ul>
         </nav>
     )

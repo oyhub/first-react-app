@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Greeting from './components/greeting';
 import Person from './components/Person';
 import Product from './components/Product';
@@ -18,6 +18,10 @@ import Nav from './components/Nav';
 import Layout from './components/Layout';
 import LocalProducts from './components/LocalProducts';
 import PostApiCall from './components/ApiCall/PostApiCall';
+import Post, { SinglePost } from './components/ApiCall/Post';
+import { usePerson } from './hooks/usePerson';
+import useApi from './hooks/useApi';
+import FirstForm from './components/First-form';
 
 const products = [
     { id: 0, title: 'Bread', price: 19.99, isOnSale: true },
@@ -25,6 +29,21 @@ const products = [
     { id: 2, title: 'Cheese', price: 35.99, isOnSale: false },
     { id: 3, title: 'Water', price: 15.99, isOnSale: true },
 ];
+
+function UseTheUseApi() {
+    const { data, isLoading, isError } = useApi(
+        'https://jsonplaceholder.typicode.com/todos'
+    );
+
+    if (isLoading) {
+        return <div>Loading...</div>
+    }
+    if (isError) {
+        return <div>Error!</div>
+    }
+    console.log(data);
+    return <div>Data loaded from the useApi</div>
+}
 
 function App() {
     const [productTitle, setProductTitle] = useState('Milk');
@@ -37,12 +56,19 @@ function App() {
         setActiveState(!activeState);
     }
 
+    const { greetPerson, setFirstName } = usePerson();
+    useEffect(() => {
+        setFirstName('Ola');
+        greetPerson();
+    }, [setFirstName, greetPerson]);
+
   // @ts-ignore
     return (
     <div>
         {/*<Nav/>*/}
         {/*<Greeting></Greeting>*/}
         {/*<Person firstName="First" lastName="Last name" city="The city"></Person>*/}
+        <UseTheUseApi/>
         <button onClick={onButtonClick}>Change Product</button>
         {/*<Product productTitle={productTitle}></Product>*/}
         {/*<ProductList products={products}></ProductList>*/}
@@ -69,6 +95,8 @@ function App() {
                 <Route path="zustand" element={<Zustand/>}/>
                 <Route path="localproducts/:id" element={<LocalProducts/>}/>
                 <Route path="postapicall" element={<PostApiCall/>}/>
+                <Route path="post/:id" element={<SinglePost/>}/>
+                <Route path="firstform" element={<FirstForm/>}/>
                 <Route path="*" element={<div>Element not found</div>}/>
             </Route>
         </Routes>
