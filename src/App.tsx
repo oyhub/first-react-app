@@ -22,6 +22,13 @@ import Post, { SinglePost } from './components/ApiCall/Post';
 import { usePerson } from './hooks/usePerson';
 import useApi from './hooks/useApi';
 import FirstForm from './components/First-form';
+import ReactHookForm from './components/react-hook-form';
+import ProductCard from './components/ProductCard';
+import ProductListForTesting from './components/ProductListForTesting/ProductList';
+
+function addToCart(productIndex: string) {
+    console.log('Adding to cart, index:', productIndex);
+}
 
 const products = [
     { id: 0, title: 'Bread', price: 19.99, isOnSale: true },
@@ -97,9 +104,20 @@ function App() {
                 <Route path="postapicall" element={<PostApiCall/>}/>
                 <Route path="post/:id" element={<SinglePost/>}/>
                 <Route path="firstform" element={<FirstForm/>}/>
+                <Route path="reacthookform" element={<ReactHookForm/>}/>
                 <Route path="*" element={<div>Element not found</div>}/>
             </Route>
         </Routes>
+
+        <ProductCard
+            index="0"
+            title="Milk"
+            description="Fresh milk that was locally sourced."
+            price={9.99}
+            onAddToCartClick={addToCart}
+        />
+
+        <ProductListForTesting/>
     </div>
   );
 }

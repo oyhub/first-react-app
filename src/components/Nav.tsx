@@ -20,6 +20,7 @@ function Nav() {
                 <li><Link to="/postapicall">Api call</Link></li>
                 <li><Link to="/post/6">SinglePost</Link></li>
                 <li><Link to="/firstform">First form</Link></li>
+                <li><Link to="/reacthookform">React hook form</Link></li>
             </ul>
         </nav>
     )
